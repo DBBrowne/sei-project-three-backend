@@ -1,3 +1,4 @@
+import Http from 'http'
 import express from 'express'
 import cors from 'cors'
 
@@ -8,21 +9,21 @@ import logger from './lib/logger.js'
 import router from './config/router.js'
 import errorHandler from './lib/errorHandler.js'
 
-const app = express()
-app.use(express.json())
-app.use(cors())
+const app = express.Router();
+apa.use('/', express.json())
+app.use('/', cors())
 app.use('/', logger)
 app.use('/api', router)
-app.use(errorHandler)
+app.use('/', errorHandler)
+
+const server = express()
+server.use('/', app);
 
 async function startServer() {
-  try {
-    await connectToDatabase()
-    console.log('🌍 database has connected')
-    app.listen(port, () => console.log(`Up and running on port ${port}`) )
-  } catch (err) {
-    console.log('something went wrong', err)
-  }
+    await connectToDatabase();
+    console.info('🌍 database has connected');
+    const httpServer = Http.createServer(server);
+    httpServer.listen(port, () => console.info(`Up and running on`, httpServer.address()) )
 }
 
-startServer()
+startServer().catch(console.error);
