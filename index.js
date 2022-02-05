@@ -10,7 +10,7 @@ import router from './config/router.js'
 import errorHandler from './lib/errorHandler.js'
 
 const app = express.Router();
-apa.use('/', express.json())
+app.use('/', express.json())
 app.use('/', cors())
 app.use('/', logger)
 app.use('/api', router)
