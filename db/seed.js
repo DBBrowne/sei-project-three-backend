@@ -8,8 +8,7 @@ import memories from './data/memories.js'
 import trips from './data/trips.js'
 
 import { connectToDatabase, truncateDb, disconnectDb } from './helpers.js'
-import dotenv from 'dotenv'
-dotenv.config()
+import { adminPW } from '../config/environment.js'
 
 async function seed() {
   try {
@@ -20,13 +19,13 @@ async function seed() {
     console.log('database emptied')
 
     console.log('creating admin user')
-    console.log('Admin Pass:', process.env.ADMIN_PASS)
+    console.log('Admin Pass:', adminPW)
     const adminUser = await User.create({
       displayName: 'admin',
       email: 'admin@mail.com',
       image: 'https://res.cloudinary.com/team-mad/image/upload/v1642010300/placebook-profile-images/k0kj0qyufel6ucygpxwn.jpg',
-      password: process.env.ADMIN_PASS,
-      passwordConfirmation: process.env.ADMIN_PASS,
+      password: adminPW,
+      passwordConfirmation: adminPW,
     })
 
     console.log('Admin user ID:', adminUser._id)
